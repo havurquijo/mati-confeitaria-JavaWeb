@@ -6,10 +6,7 @@ package tables;
 
 import interfaces.ElementDao;
 import java.util.ArrayList;
-
-import tableObjects.Account;
 import tableObjects.Cart;
-import util.MyDate;
 
 /**
  *
@@ -103,13 +100,37 @@ public class CartDao extends Dao implements ElementDao<Cart>{
     }
 
     @Override
-    public boolean updateElement(Cart element) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean updateElement(Cart cart) throws Exception {
+        try {
+            openConnection();
+            preparedStatement = connection.prepareStatement("update mati_db.cart set "
+                    + "id_customer = ?,"
+                    + "cart_items = ?"
+                    + " where id_cart = ?");
+            preparedStatement.setInt(1,cart.getId_customer());
+            preparedStatement.setString(2,cart.getCart_items().toString());
+            preparedStatement.setInt(3,cart.getId_cart());
+            closeConnection();
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean deleteElement(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            openConnection();
+            preparedStatement = connection.prepareStatement("delete mati_db.cart where id_cart = ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            closeConnection();
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
+        return true;
     }
     
 }

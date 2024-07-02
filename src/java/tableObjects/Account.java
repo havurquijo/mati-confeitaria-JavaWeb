@@ -26,7 +26,7 @@ public class Account implements User,Ids,Dates{
     private String address = null;
     private String cep = null;
     private int age = 0;
-    private String user_discount = null;
+    private float user_discount = 0;
     private MyDate created_at = null;
     private MyDate deleted_at = null;
 
@@ -34,7 +34,7 @@ public class Account implements User,Ids,Dates{
     public Account(){
     }
 
-    public Account(int id_people, String type, String user_name, String user_password, String name, String phone_number, String cpf, String email, String address, String cep, int age, String user_discount, MyDate created_at, MyDate deleted_at) {
+    public Account(int id_people, String type, String user_name, String user_password, String name, String phone_number, String cpf, String email, String address, String cep, int age, float user_discount, MyDate created_at, MyDate deleted_at) {
         this.id_people = id_people;
         this.type = type;
         this.user_name = user_name;
@@ -52,11 +52,11 @@ public class Account implements User,Ids,Dates{
     }
     
     //Getter setter functions
-    public String getUser_discount() {
+    public float getUser_discount() {
         return user_discount;
     }
 
-    public void setUser_discount(String user_discount) {
+    public void setUser_discount(float user_discount) {
         this.user_discount = user_discount;
     }
     
