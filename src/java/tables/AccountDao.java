@@ -52,8 +52,8 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
             preparedStatement.setString(9,account.getCep());
             preparedStatement.setInt(10,account.getAge());
             preparedStatement.setFloat(11,account.getUser_discount());
-            preparedStatement.setTimestamp(12,account.getCreatedAt().parse());
-            preparedStatement.setTimestamp(13,account.getDeletedAt().parse());
+            preparedStatement.setTimestamp(12,account.getDeleted_at().parse());
+            preparedStatement.setTimestamp(13,account.getDeleted_at().parse());
             //executing the query
             preparedStatement.execute();
             //clossing the connection
@@ -84,8 +84,8 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
             account.setCep(resultSet.getString("cep"));
             account.setAge(resultSet.getInt("age"));
             account.setUser_discount(resultSet.getFloat("user_discount"));
-            account.setCreatedAt(new MyDate(resultSet.getTimestamp("created_at")));
-            account.setDeletedAt(new MyDate(resultSet.getTimestamp("deleted_at")));
+            account.setDeleted_at(new MyDate(resultSet.getTimestamp("created_at")));
+            account.setDeleted_at(new MyDate(resultSet.getTimestamp("deleted_at")));
             closeConnection();
         }else{
             return null;
@@ -114,8 +114,8 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
                 account.setCep(resultSet.getString("cep"));
                 account.setAge(resultSet.getInt("age"));
                 account.setUser_discount(resultSet.getFloat("user_discount"));
-                account.setCreatedAt(new MyDate(resultSet.getTimestamp("created_at")));
-                account.setDeletedAt(new MyDate(resultSet.getTimestamp("deleted_at")));
+                account.setDeleted_at(new MyDate(resultSet.getTimestamp("created_at")));
+                account.setDeleted_at(new MyDate(resultSet.getTimestamp("deleted_at")));
                 accounts.add(account);
             }
             closeConnection();
@@ -151,8 +151,8 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
                 account.setCep(resultSet.getString("cep"));
                 account.setAge(resultSet.getInt("age"));
                 account.setUser_discount(resultSet.getFloat("user_discount"));
-                account.setCreatedAt(new MyDate(resultSet.getTimestamp("created_at")));
-                account.setDeletedAt(new MyDate(resultSet.getTimestamp("deleted_at")));
+                account.setDeleted_at(new MyDate(resultSet.getTimestamp("created_at")));
+                account.setDeleted_at(new MyDate(resultSet.getTimestamp("deleted_at")));
                 accounts.add(account);
             }
             closeConnection();
@@ -192,8 +192,8 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
             preparedStatement.setString(9,account.getCep());
             preparedStatement.setInt(10,account.getAge());
             preparedStatement.setFloat(11,account.getUser_discount());
-            preparedStatement.setTimestamp(12,account.getCreatedAt().parse());
-            preparedStatement.setTimestamp(13,account.getDeletedAt().parse());
+            preparedStatement.setTimestamp(12,account.getDeleted_at().parse());
+            preparedStatement.setTimestamp(13,account.getDeleted_at().parse());
             preparedStatement.setInt(14, account.getId());
             closeConnection();
         } catch (Exception e) {

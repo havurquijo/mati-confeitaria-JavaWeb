@@ -8,6 +8,6 @@ package tables;
  *
  * @author hvurq
  */
-public class Products {
+public class OrdersDao {
     
 }

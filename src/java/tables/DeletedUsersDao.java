@@ -44,8 +44,8 @@ public class DeletedUsersDao extends Dao implements ElementDao<DeletedUser> {
             preparedStatement.setString(8,deletedUser.getAddress());
             preparedStatement.setString(9,deletedUser.getCep());
             preparedStatement.setInt(10,deletedUser.getAge());
-            preparedStatement.setTimestamp(12,deletedUser.getCreatedAt().parse());
-            preparedStatement.setTimestamp(13,deletedUser.getDeletedAt().parse());
+            preparedStatement.setTimestamp(12,deletedUser.getCreated_at().parse());
+            preparedStatement.setTimestamp(13,deletedUser.getDeleted_at().parse());
             //executing the query
             preparedStatement.execute();
             //clossing the connection
@@ -75,8 +75,8 @@ public class DeletedUsersDao extends Dao implements ElementDao<DeletedUser> {
             deletedUser.setAddress(resultSet.getString("address"));
             deletedUser.setCep(resultSet.getString("cep"));
             deletedUser.setAge(resultSet.getInt("age"));
-            deletedUser.setCreatedAt(new MyDate(resultSet.getTimestamp("created_at")));
-            deletedUser.setDeletedAt(new MyDate(resultSet.getTimestamp("deleted_at")));
+            deletedUser.setCreated_at(new MyDate(resultSet.getTimestamp("created_at")));
+            deletedUser.setDeleted_at(new MyDate(resultSet.getTimestamp("deleted_at")));
             closeConnection();
         }else{
             return null;
@@ -104,8 +104,8 @@ public class DeletedUsersDao extends Dao implements ElementDao<DeletedUser> {
                 deletedUser.setAddress(resultSet.getString("address"));
                 deletedUser.setCep(resultSet.getString("cep"));
                 deletedUser.setAge(resultSet.getInt("age"));
-                deletedUser.setCreatedAt(new MyDate(resultSet.getTimestamp("created_at")));
-                deletedUser.setDeletedAt(new MyDate(resultSet.getTimestamp("deleted_at")));
+                deletedUser.setCreated_at(new MyDate(resultSet.getTimestamp("created_at")));
+                deletedUser.setDeleted_at(new MyDate(resultSet.getTimestamp("deleted_at")));
                 deletedUsers.add(deletedUser);
             }
             closeConnection();
@@ -140,8 +140,8 @@ public class DeletedUsersDao extends Dao implements ElementDao<DeletedUser> {
                 deletedUser.setAddress(resultSet.getString("address"));
                 deletedUser.setCep(resultSet.getString("cep"));
                 deletedUser.setAge(resultSet.getInt("age"));
-                deletedUser.setCreatedAt(new MyDate(resultSet.getTimestamp("created_at")));
-                deletedUser.setDeletedAt(new MyDate(resultSet.getTimestamp("deleted_at")));
+                deletedUser.setCreated_at(new MyDate(resultSet.getTimestamp("created_at")));
+                deletedUser.setDeleted_at(new MyDate(resultSet.getTimestamp("deleted_at")));
                 deletedUsers.add(deletedUser);
             }
             closeConnection();
@@ -179,8 +179,8 @@ public class DeletedUsersDao extends Dao implements ElementDao<DeletedUser> {
             preparedStatement.setString(8,deletedUser.getAddress());
             preparedStatement.setString(9,deletedUser.getCep());
             preparedStatement.setInt(10,deletedUser.getAge());
-            preparedStatement.setTimestamp(12,deletedUser.getCreatedAt().parse());
-            preparedStatement.setTimestamp(13,deletedUser.getDeletedAt().parse());
+            preparedStatement.setTimestamp(12,deletedUser.getCreated_at().parse());
+            preparedStatement.setTimestamp(13,deletedUser.getDeleted_at().parse());
             preparedStatement.setInt(14, deletedUser.getId());
             closeConnection();
         } catch (Exception e) {

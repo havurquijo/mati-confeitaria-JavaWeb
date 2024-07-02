@@ -172,22 +172,22 @@ public class Account implements User,Ids,Dates{
     }
 
     @Override
-    public MyDate getCreatedAt() {
+    public MyDate getCreated_at() {
         return this.created_at;
     }
 
     @Override
-    public MyDate getDeletedAt() {
+    public MyDate getDeleted_at() {
         return this.deleted_at;
     }
 
     @Override
-    public void setCreatedAt(MyDate created_at) {
+    public void setCreated_at(MyDate created_at) {
         this.created_at = created_at;
     }
 
     @Override
-    public void setDeletedAt(MyDate deleted_at) {
+    public void setDeleted_at(MyDate deleted_at) {
         this.deleted_at = deleted_at;
     }
 

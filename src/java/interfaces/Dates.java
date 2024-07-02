@@ -11,8 +11,8 @@ import util.MyDate;
  */
 public interface Dates {
     /*This interface will help to create the Dao classes that which have Date values*/    
-    public MyDate getCreatedAt();
-    public MyDate getDeletedAt();
-    public void setCreatedAt(MyDate var);
-    public void setDeletedAt(MyDate var);
+    public MyDate getCreated_at();
+    public MyDate getDeleted_at();
+    public void setCreated_at(MyDate var);
+    public void setDeleted_at(MyDate var);
 }

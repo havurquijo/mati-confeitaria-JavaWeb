@@ -14,7 +14,7 @@ import util.MyDate;
  * @author hvurq
  */
 public class DeletedUser implements User,Ids,Dates{
-    //Attributes
+    //_attributes
     private int id_people = 0;
     private String type = null;
     private String user_name = null;
@@ -160,22 +160,22 @@ public class DeletedUser implements User,Ids,Dates{
     }
 
     @Override
-    public MyDate getCreatedAt() {
+    public MyDate getCreated_at() {
         return created_at;
     }
 
     @Override
-    public void setCreatedAt(MyDate created_at) {
+    public void setCreated_at(MyDate created_at) {
         this.created_at = created_at;
     }
 
     @Override
-    public MyDate getDeletedAt() {
+    public MyDate getDeleted_at() {
         return deleted_at;
     }
 
     @Override
-    public void setDeletedAt(MyDate deleted_at) {
+    public void setDeleted_at(MyDate deleted_at) {
         this.deleted_at = deleted_at;
     }
     
