@@ -19,6 +19,7 @@ public class Account implements User,Ids,Dates{
     private String type = null;
     private String user_name = null;
     private String user_password = null;
+    private String salt = null;
     private String name = null;
     private String phone_number = null;
     private String cpf = null;
@@ -28,17 +29,14 @@ public class Account implements User,Ids,Dates{
     private int age = 0;
     private float user_discount = 0;
     private MyDate created_at = null;
-    private MyDate deleted_at = null;
 
     //Constructor
     public Account(){
     }
 
-    public Account(int id_people, String type, String user_name, String user_password, String name, String phone_number, String cpf, String email, String address, String cep, int age, float user_discount, MyDate created_at, MyDate deleted_at) {
-        this.id_people = id_people;
+    public Account(String type, String user_name, String name, String user_password, String salt, String phone_number, String cpf, String email, String address, String cep, int age, float user_discount, MyDate created_at) {
         this.type = type;
         this.user_name = user_name;
-        this.user_password = user_password;
         this.name = name;
         this.phone_number = phone_number;
         this.cpf = cpf;
@@ -48,7 +46,8 @@ public class Account implements User,Ids,Dates{
         this.age = age;
         this.user_discount = user_discount;
         this.created_at = created_at;
-        this.deleted_at = deleted_at;
+        this.user_password = user_password;
+        this.salt = salt;
     }
     
     //Getter setter functions
@@ -79,11 +78,6 @@ public class Account implements User,Ids,Dates{
     @Override
     public void setUser_name(String user_name) {
         this.user_name = user_name;
-    }
-
-    @Override
-    public void setUser_password(String user_password) {
-        this.user_password = user_password;
     }
 
     @Override
@@ -132,11 +126,6 @@ public class Account implements User,Ids,Dates{
     }
 
     @Override
-    public String getUser_password() {
-        return this.user_password;
-    }
-
-    @Override
     public String getName() {
         return this.name;
     }
@@ -177,23 +166,40 @@ public class Account implements User,Ids,Dates{
     }
 
     @Override
-    public MyDate getDeleted_at() {
-        return this.deleted_at;
-    }
-
-    @Override
     public void setCreated_at(MyDate created_at) {
         this.created_at = created_at;
     }
 
     @Override
     public void setDeleted_at(MyDate deleted_at) {
-        this.deleted_at = deleted_at;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public String getUser_password() {
+        return user_password;
+    }
+
+    public void setUser_password(String user_password) {
+        this.user_password = user_password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+    
 
     @Override
     public String toString() {
-        return "Account{" + "id_people=" + id_people + ", type=" + type + ", user_name=" + user_name + ", user_password=" + user_password + ", name=" + name + ", phone_number=" + phone_number + ", cpf=" + cpf + ", email=" + email + ", address=" + address + ", cep=" + cep + ", age=" + age + ", user_discount=" + user_discount + ", created_at=" + created_at + ", deleted_at=" + deleted_at + '}';
+        return "Account{" + "id_people=" + id_people + ", type=" + type + ", user_name=" + user_name + ", name=" + name + ", phone_number=" + phone_number + ", cpf=" + cpf + ", email=" + email + ", address=" + address + ", cep=" + cep + ", age=" + age + ", user_discount=" + user_discount + ", created_at=" + created_at + '}';
+    }
+
+    @Override
+    public MyDate getDeleted_at() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

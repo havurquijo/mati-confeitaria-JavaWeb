@@ -6,6 +6,7 @@ package util;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -26,4 +27,7 @@ public class MyDate {
         return new Timestamp(this.longDate);//accepts a long value which can be taken from Date
     }
     
+    public int bornDateToAge(Date date){
+        return (int) TimeUnit.MILLISECONDS.toDays(this.longDate-date.getTime()) / 365;
+    }
 }

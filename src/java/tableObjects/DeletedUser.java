@@ -19,6 +19,7 @@ public class DeletedUser implements User,Ids,Dates{
     private String type = null;
     private String user_name = null;
     private String user_password = null;
+    private String salt = null;
     private String name = null;
     private String phone_number = null;
     private String cpf = null;
@@ -31,6 +32,7 @@ public class DeletedUser implements User,Ids,Dates{
 
     public DeletedUser() {
     }
+    
     
     public DeletedUser(int id_people, String type, String user_name, String user_password, String name, String phone_number, String cpf, String email, String address, String cep, int age, MyDate created_at, MyDate deleted_at) {
         this.id_people = id_people;
@@ -48,6 +50,13 @@ public class DeletedUser implements User,Ids,Dates{
         this.deleted_at = deleted_at;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
     
     @Override
     public int getId() {
@@ -79,12 +88,12 @@ public class DeletedUser implements User,Ids,Dates{
         this.user_name = user_name;
     }
 
-    @Override
+    
     public String getUser_password() {
         return user_password;
     }
 
-    @Override
+    
     public void setUser_password(String user_password) {
         this.user_password = user_password;
     }

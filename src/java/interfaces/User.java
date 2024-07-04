@@ -12,7 +12,6 @@ public interface User {
     /*This interface will be used at least 2 times to cosntruct account and deleted users */
     public void setType(String var);
     public void setUser_name(String var);
-    public void setUser_password(String var);
     public void setName(String var);
     public void setPhone_number(String var);
     public void setCpf(String var);
@@ -23,7 +22,6 @@ public interface User {
 
     public String getType();
     public String getUser_name();
-    public String getUser_password();
     public String getName();
     public String getPhone_number();
     public String getCpf();

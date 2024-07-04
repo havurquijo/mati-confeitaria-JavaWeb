@@ -6,6 +6,8 @@ package tables;
 
 import interfaces.ElementDao;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import tableObjects.Cart;
 
 /**
@@ -15,7 +17,9 @@ import tableObjects.Cart;
 public class CartDao extends Dao implements ElementDao<Cart>{
 
     @Override
-    public boolean insertElement(Cart cart) throws Exception {
+    public HashMap<String,Object> insertElement(Cart cart) throws Exception {
+        HashMap<String,Object> toReturn = new HashMap<>();
+        toReturn.put("reason", null);
         try {
             openConnection();
             //SQL statement with jockers ?
@@ -30,9 +34,11 @@ public class CartDao extends Dao implements ElementDao<Cart>{
                 preparedStatement.execute();
                 //clossing the connection
                 closeConnection();
-                return true;
+                toReturn.put("response", true);
+                return toReturn;
             } catch (Exception e) {
-                return false;
+                toReturn.put("response", false);
+                return toReturn;
             }
     }
 

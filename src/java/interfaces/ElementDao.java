@@ -4,6 +4,7 @@
  */
 package interfaces;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public interface ElementDao <Type>{
     /*Here are pressented all the methods for getting values from database. 
     Each element is a row of an specific table named Type, because each table will have a class associated.*/
-    public boolean insertElement(Type element)throws Exception;
+    public HashMap<String,Object> insertElement(Type element)throws Exception;
     public Type getElementById(int id)throws Exception;
     public ArrayList<Type> getElements()throws Exception;
     public ArrayList<Type> getElementsSubset(int id_start, int id_end)throws Exception;/*This is a function to catch a subset of all elements via API*/

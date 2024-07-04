@@ -14,6 +14,7 @@ import java.sql.SQLException;
  * @author hvurq
  */
 public class Dao {
+    String databaseName = "mati_db.public";
     Connection connection;//Create Connection
     PreparedStatement preparedStatement;//Access table with sql statements (insert update delete)
     ResultSet resultSet;//Consult the sql table (select)
