@@ -7,13 +7,11 @@ package tables;
 import tableObjects.Account;
 import util.MyDate;
 import interfaces.ElementDao;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import util.PasswObject;
 
 /**
@@ -29,11 +27,9 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
     //Dao extention and override
     @Override
     public HashMap<String,Object> insertElement(Account account) throws Exception{
-        HashMap<String,Object> existenceResponse = this.checkAccount(account); 
-        if((boolean) existenceResponse.get("response")){
-            existenceResponse.replace("response", false);
-            return existenceResponse;
-        }
+        HashMap<String,Object> existenceResponse = new HashMap<>();
+        existenceResponse.put("response", false);
+        existenceResponse.put("reason", null);
         try {
             openConnection();
             //SQL statement with jockers ?
@@ -59,7 +55,7 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
             preparedStatement.setString(4, account.getSalt());
             preparedStatement.setString(5,account.getName());
             preparedStatement.setString(6,account.getPhone_number());
-            preparedStatement.setString(7,account.getCep());
+            preparedStatement.setString(7,account.getCpf());
             preparedStatement.setString(8,account.getEmail());
             preparedStatement.setString(9,account.getAddress());
             preparedStatement.setString(10,account.getCep());
@@ -73,8 +69,19 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
             existenceResponse.replace("response", true);
             return existenceResponse;
         } catch (SQLException e) {
-            System.out.println("Error when inserting in database.\n Error Code:"+e.getErrorCode()+"\n");
-            existenceResponse.replace("response", e.getErrorCode());
+            System.out.println(e.getErrorCode());
+            System.out.println(e.getSQLState());
+            System.out.println(e.getMessage());
+            //SQL Error treatment
+            if ("23505".equals(e.getSQLState())){
+                System.out.println("Duplicate key value violates unique constraint."+e.getMessage());
+                existenceResponse = this.checkAccount(account); 
+                if((boolean) existenceResponse.get("response")){
+                    existenceResponse.replace("response", false);
+                    return existenceResponse;
+                }           
+            }
+            System.out.println("General error when inserting in database.\n Error Code:"+e.getMessage()+"\n");
             return existenceResponse;
         }
     }
@@ -106,8 +113,34 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
         return account;
     }
 
+    public Account getElementByUserName(String user_name) throws Exception{
+        openConnection();
+        preparedStatement = connection.prepareStatement("select * from "+databaseName+".account where user_name = ?");
+        preparedStatement.setString(1, user_name);
+        resultSet = preparedStatement.executeQuery();
+        Account account = new Account();
+        if(resultSet.next()){
+            account.setId(resultSet.getInt("id_people"));
+            account.setType(resultSet.getString("type"));
+            account.setUser_name(user_name);
+            account.setName(resultSet.getString("name"));
+            account.setPhone_number(resultSet.getString("phone_number"));
+            account.setCpf(resultSet.getString("cpf"));
+            account.setEmail(resultSet.getString("email"));
+            account.setAddress(resultSet.getString("address"));
+            account.setCep(resultSet.getString("cep"));
+            account.setAge(resultSet.getInt("age"));
+            account.setUser_discount(resultSet.getFloat("user_discount"));
+            account.setCreated_at(new MyDate(resultSet.getTimestamp("created_at")));
+            closeConnection();
+        }else{
+            return null;
+        }
+        return account;
+    }
+
     @Override
-    public ArrayList<Account> getElements() {
+    public ArrayList<Account> getElements() throws Exception{
         ArrayList<Account> accounts = new ArrayList();
         try {
             openConnection();
@@ -137,7 +170,7 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
     }
 
     @Override
-    public ArrayList<Account> getElementsSubset(int start_column, int end_column) {
+    public ArrayList<Account> getElementsSubset(int start_column, int end_column) throws Exception{
         ArrayList<Account> accounts = new ArrayList();
         try {
             openConnection();
@@ -172,7 +205,7 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
     }
 
     @Override
-    public boolean updateElement(Account account) {
+    public boolean updateElement(Account account) throws Exception{
         try {
             openConnection();
             preparedStatement = connection.prepareStatement("update "+databaseName+".account set "
@@ -196,7 +229,7 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
             preparedStatement.setString(4, account.getSalt());
             preparedStatement.setString(5,account.getName());
             preparedStatement.setString(6,account.getPhone_number());
-            preparedStatement.setString(7,account.getCep());
+            preparedStatement.setString(7,account.getCpf());
             preparedStatement.setString(8,account.getEmail());
             preparedStatement.setString(9,account.getAddress());
             preparedStatement.setString(10,account.getCep());
@@ -213,7 +246,7 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
     }
 
     @Override
-    public boolean deleteElement(int id) {
+    public boolean deleteElement(int id) throws Exception{
         try {
             openConnection();
             preparedStatement = connection.prepareStatement("delete from "+databaseName+".account where id_people = ?");
@@ -227,20 +260,21 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
         return true;
     }
     
-    public PasswObject getPassword(int id){
+    public PasswObject getPassword(String user_name)throws Exception{
         try {
             openConnection();
-            preparedStatement = connection.prepareStatement("select (user_password,salt) from "+databaseName+".account where id_people = ?");
-            preparedStatement.setInt(1, id);
+            preparedStatement = connection.prepareStatement("select id_people,user_password,salt from "+databaseName+".account where user_name = ?");
+            preparedStatement.setString(1, user_name);
             resultSet = preparedStatement.executeQuery();
             closeConnection();
             if (resultSet.next()){
+                int id = resultSet.getInt("id_people");
                 return new PasswObject(id,
                         resultSet.getString("user_password"), 
                         resultSet.getString("salt")
                         );
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             //TODO
         }
         return null;
@@ -257,7 +291,7 @@ public class AccountDao extends Dao implements ElementDao<Account>{//implements 
             ArrayList<ResultSet> resultSets = new ArrayList<>();
             String[] columns = {"user_name","email","phone_number","cpf"};
             for (String string : columns) {
-                preparedStatements.add(connection.prepareStatement("select exists(select 1 from "+databaseName+".account where +"+string+"+ = ?)"));
+                preparedStatements.add(connection.prepareStatement("select exists(select 1 from "+databaseName+".account where "+string+" = ?)"));
             }
             //preparing
             String[] properties = {account.getUser_name(),account.getEmail(),account.getPhone_number(),account.getCpf()};

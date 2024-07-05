@@ -11,7 +11,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        
     </head>
     <body>
       <!--Header extracted from index.html-->
@@ -152,7 +151,7 @@
                     Looks good!
                   </div>
                   <div class="invalid-feedback">
-                    The user name must have at least 2 letters and 20 letters at most.
+                    Must be a valid cellphone number.
                   </div>
                   <p style="font-size:small;color: rgb(106, 106, 108);">You may need to fill this latter.</p>
                 </div>
@@ -170,7 +169,10 @@
                 </div>
 <!-------------Button------------------>
 <!--Button submit-->
-                <div class="col-md-12 text-center" style="padding-bottom: 2%;">
+                <div class="col-md-6 text-center" style="padding-bottom: 2%;">
+                  <button class="btn btn-primary" style="color: rgb(155, 0, 0);background-color: rgb(255, 188, 43);" type="button" onclick="fillForm()" contextmenu="For testing the formulary" >Fill Random</button>
+                </div>
+                <div class="col-md-6 text-center" style="padding-bottom: 2%;">
                   <button class="btn btn-primary" type="submit">Register</button>
                 </div>
               </form>
@@ -232,6 +234,59 @@
             maskCep();
             maskCpf();
           });
+        </script>
+        <!--Script for filling the register Formulary-->
+        <script>
+          function genRandomString(length,charSet){
+              var result = '';
+              const lengthCharSet = charSet.length;
+              for (let index = 0; index < length; index++) {
+                result += charSet.charAt(Math.floor(Math.random()*lengthCharSet));
+              }
+              return result;
+          }
+          function fillForm() {
+            $('#name').val(genRandomString(1,'QWERTYUIOPASDFGHJKLZXCVBNM')
+                                +genRandomString(4,'qwertyuiopasdfghjklzxcvbnm')
+                                +" "
+                                +genRandomString(1,'QWERTYUIOPASDFGHJKLZXCVBNM')
+                                +genRandomString(4,'qwertyuiopasdfghjklzxcvbnm')
+                                +" "
+                                +genRandomString(1,'QWERTYUIOPASDFGHJKLZXCVBNM')
+                                +genRandomString(4,'qwertyuiopasdfghjklzxcvbnm'));
+
+            $('#password').val(genRandomString(2,'qwertyuiopasdfghjklzxcvbnm')
+                                +genRandomString(2,'QWERTYUIOPASDFGHJKLZXCVBNM')
+                                +genRandomString(2,'0123456789')
+                                +genRandomString(2,'!@#$%¨&*()_+=-/.,?|'));
+            $('#email').val(genRandomString(5,'qwertyuiopasdfghjklzxcvbnm._')
+                              +'@'
+                              +genRandomString(4,'qwertyuiopasdfghjklzxcvbnm')
+                              +'.'
+                              +genRandomString(3,'qwertyuiopasdfghjklzxcvbnm'));
+            $('#cpf').val(genRandomString(11,'0123456789'));
+            $('#phone').val(genRandomString(2,'0123456789')
+                            +'9'
+                            +genRandomString(8,'0123456789'));
+            $('#address').val(genRandomString(1,'QWERTYUIOPASDFGHJKLZXCVBNM')
+                            +". "
+                            +genRandomString(1,'QWERTYUIOPASDFGHJKLZXCVBNM')
+                            +genRandomString(5,'qwertyuiopasdfghjklzxcvbnm')
+                            +" "
+                            +genRandomString(1,'QWERTYUIOPASDFGHJKLZXCVBNM')
+                            +genRandomString(5,'qwertyuiopasdfghjklzxcvbnm')
+                            +" "
+                            +genRandomString(3,'0123456789')
+                            +", "
+                            +genRandomString(1,'QWERTYUIOPASDFGHJKLZXCVBNM')
+                            +genRandomString(5,'qwertyuiopasdfghjklzxcvbnm')
+                            +" "
+                            +genRandomString(1,'QWERTYUIOPASDFGHJKLZXCVBNM')
+                            +genRandomString(5,'qwertyuiopasdfghjklzxcvbnm'));
+          $('#cep').val(genRandomString(1,'123456789')+genRandomString(7,'0123456789'));
+          $('#user_name').val(genRandomString(3,'qwertyuiopasdfghjklzxcvbnm')
+                              +genRandomString(Math.floor(Math.random()*6),'qwertyuiopasdfghjklzxcvbnm0123456789._'));
+          }
         </script>
     </body>
 </html>

@@ -98,7 +98,7 @@
 
     // Handle the response
     if ((boolean) responseInsertAccount.get("response")) {
-        response.sendRedirect("registerpage.jsp?inserted=true&reason=null");
+        response.sendRedirect("logginpage.jsp?inserted=true&reason=null");
     } else if (responseInsertAccount.get("reason") == null) {
         response.sendRedirect("registerpage.jsp?inserted=false&reason=null");
     } else {

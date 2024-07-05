@@ -54,36 +54,30 @@
         <div class="container-fluid" style="margin-top: 15%; margin-bottom: 5%;">
           <div class="row justify-content-center text-center">
             <div class="col-md-6">
-              <form class="row g-3 needs-validation" style="background-color: rgb(196, 230, 249);border-radius: 10%;"  method="POST" novalidate>
+              <form class="row g-3 needs-validation" style="background-color: rgb(196, 230, 249);border-radius: 10%;"  method="POST" action="logginconfirmation.jsp" novalidate>
                 <p style="font-size:x-large; color: rgb(7, 1, 95);">Loggin account</p>
 <!-------------Required------------------>
 <!--User name input-->
                 <div class="col-md-12">
                   <label for="user_name" class="form-label">User name</label>
-                  <input type="text" class="form-control" id="user_name" placeholder="Set an User Name" required pattern="\w{2,20}">
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
+                  <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Set an User Name" required pattern="\w{2,20}">
                   <div class="invalid-feedback">
-                    The user name must have at least 2 letters and 20 letters at most.
+                    Did you forgot your user name. <a href="#">Click here to reset</a>
                   </div>
                 </div>
 <!--Password input-->
                 <div class="col-md-12">
                   <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password" required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}">
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Password" required><!-- pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}">-->
                   <div class="valid-feedback">
                     Looks good!
                   </div>
                   <div class="invalid-feedback">
-                    <ul>
-                      <li>At least 8 characters long.</li>
-                      <li>Contains at least one uppercase letter.</li>
-                      <li>Contains at least one lowercase letter.</li>
-                      <li>Contains at least one number.</li>
-                      <li>Contains at least one special character (e.g., !@#$%^&*).</li>
-                    </ul>
+                    Did you forgot your password. <a href="#">Click here to reset</a>
                   </div>
+                  <div class="alert alert-danger" role="alert" hidden>
+                    A simple danger alert—check it out!
+                  </div>      
                 </div>
 <!-------------Button------------------>
 <!--Button submit-->
@@ -128,27 +122,6 @@
               }, false)
             })
           })()
-        </script>
-        <!--Script for masking inputs-->
-        <script>
-          // Ensure the document is fully loaded before executing the script
-          $(document).ready(function(){
-            // Function to apply input mask
-            function maskPhone(){
-              $('#phone').inputmask('(99) 9 9999-9999');
-            }
-            function maskCep(){
-              $('#cep').inputmask('99999-999');
-            }
-            function maskCpf() {
-              $('#cpf').inputmask('999.999.999-99');
-            }
-            
-            // Call mask function to apply the mask
-            maskPhone();
-            maskCep();
-            maskCpf();
-          });
         </script>
     </body>
 </html>
